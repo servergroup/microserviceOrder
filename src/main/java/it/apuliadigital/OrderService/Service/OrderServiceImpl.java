@@ -56,12 +56,13 @@ public class OrderServiceImpl implements IOrder
     }
     
       @Override
-      public List<Order> getOrders()  {
-        if (repository == null) {
-            
+      public List<Order> getOrders()  
+      {
+        if (repository == null) 
+        {  
            throw new IllegalStateException("OrderRepository is not initialized");
         }
-    return (List<Order>) repository.findAll();
+        return (List<Order>) repository.findAll();
       }
      
      
