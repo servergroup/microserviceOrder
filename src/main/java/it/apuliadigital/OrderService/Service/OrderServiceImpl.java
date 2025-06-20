@@ -1,5 +1,7 @@
 package it.apuliadigital.OrderService.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.apuliadigital.OrderService.model.Order;
@@ -44,15 +46,14 @@ public class OrderServiceImpl implements IOrder {
 
         return false;
     }
-    /*  
-     * @Override
-     * public List<Order> getOrders() {
-     * // TODO Auto-generated method stub
-     * throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
-     * }
-     * 
-     * @Override
-     * public Order getOrderDetail(int id) {
+    
+      @Override
+      public List<Order> getOrders() {
+    return (List<Order>) repository.findAll();
+      }
+     
+     //* @Override
+     /** public Order getOrderDetail(int id) {
      * // TODO Auto-generated method stub
      * throw new
      * UnsupportedOperationException("Unimplemented method 'getOrderDetail'");
