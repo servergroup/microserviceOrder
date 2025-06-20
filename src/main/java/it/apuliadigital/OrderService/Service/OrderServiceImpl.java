@@ -48,7 +48,11 @@ public class OrderServiceImpl implements IOrder {
     }
     
       @Override
-      public List<Order> getOrders() {
+      public List<Order> getOrders()  {
+        if (repository == null) {
+            
+           throw new IllegalStateException("OrderRepository is not initialized");
+        }
     return (List<Order>) repository.findAll();
       }
      
@@ -59,15 +63,9 @@ public class OrderServiceImpl implements IOrder {
      * UnsupportedOperationException("Unimplemented method 'getOrderDetail'");
      * }
      */
-    // @Override
-    // public List<Order> getOrders() {
-    // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
-    // }
+    
+   
 
-    // @Override
-    // public Order getOrderDetail(String id) {
-
-    // }
+   
 
 }
