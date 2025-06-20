@@ -39,7 +39,7 @@ public class OrderServiceImpl implements IOrder
     }
 
     @Override
-    public boolean updateQuantiity(Integer id, OrderedItem orderedItem) 
+    public boolean updateQuantity(Integer id, OrderedItem orderedItem) 
     {
         Order order = repository.findById(id).orElse(null);
         if (order == null || orderedItem == null) 
