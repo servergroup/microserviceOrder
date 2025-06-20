@@ -1,15 +1,19 @@
 package it.apuliadigital.OrderService.Service;
 
+import java.util.List;
+
 import it.apuliadigital.OrderService.model.Order;
 import it.apuliadigital.OrderService.model.OrderedItem;
 
-public interface IOrder {
+public interface IOrder 
+{
     public boolean saveOrder(Order order);
 
     public boolean deleteOrder(Integer id);
 
     public boolean updateQuantiity(Integer id, OrderedItem newItem);
-    // public List<Order> getOrders();
-    // public Order getOrderDetail(int id);
-
+    
+    public List<Order> getOrders();
+    
+    public List<OrderedItem> getOrderDetail(int id);
 }

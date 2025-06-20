@@ -4,28 +4,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class OrderedItem {
+public class OrderedItem 
+{
     @Id
     private int itemId;
     private int orderId;
     private int amount;
     private double price;
 
-    public OrderedItem() {
-    }
+    public OrderedItem() 
+    {}
 
-    public OrderedItem(int itemId, int orderId, int amount, double price) {
+    public OrderedItem(int itemId, int orderId, int amount, double price) 
+    {
         this.itemId = itemId;
         this.orderId = orderId;
         this.amount = amount;
         this.price = price;
     }
 
-    public int getItemId() {
+    public int getItemId() 
+    {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(int itemId) 
+    {
         this.itemId = itemId;
     }
 
@@ -33,28 +37,34 @@ public class OrderedItem {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(int orderId) 
+    {
         this.orderId = orderId;
     }
 
-    public int getAmount() {
+    public int getAmount() 
+    {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(int amount) 
+    {
         this.amount = amount;
     }
 
-    public double getPrice() {
+    public double getPrice() 
+    {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double price) 
+    {
         this.price = price;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         final int prime = 31;
         int result = 1;
         result = prime * result + itemId;
@@ -67,7 +77,8 @@ public class OrderedItem {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) 
+    {
         if (this == obj)
             return true;
         if (obj == null)
@@ -87,18 +98,9 @@ public class OrderedItem {
     }
 
     @Override
-    public String toString() {
+    public String toString() 
+    {
         return "OrderedItem [itemId=" + itemId + ", orderId=" + orderId + ", amount=" + amount + ", price=" + price
                 + "]";
-    }
-
-    public Object getQuantity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getQuantity'");
-    }
-
-    public void setQuantity(Object quantity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setQuantity'");
     }
 }
