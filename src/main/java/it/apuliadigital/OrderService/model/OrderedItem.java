@@ -1,42 +1,40 @@
 package it.apuliadigital.OrderService.model;
 
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.Id;
 
 @Entity
-public class OrderBook {
+public class OrderedItem {
     @Id
-
-    private String isbn;
-    private String OrderId;
+    private int itemId;
+    private int orderId;
     private int amount;
     private double price;
 
-    public OrderBook() {
+    public OrderedItem() {
     }
 
-    public OrderBook(String isbn, String orderId, int amount, double price) {
-        this.isbn = isbn;
-        OrderId = orderId;
+    public OrderedItem(int itemId, int orderId, int amount, double price) {
+        this.itemId = itemId;
+        this.orderId = orderId;
         this.amount = amount;
         this.price = price;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
-    public String getOrderId() {
-        return OrderId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        OrderId = orderId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getAmount() {
@@ -59,8 +57,8 @@ public class OrderBook {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
-        result = prime * result + ((OrderId == null) ? 0 : OrderId.hashCode());
+        result = prime * result + itemId;
+        result = prime * result + orderId;
         result = prime * result + amount;
         long temp;
         temp = Double.doubleToLongBits(price);
@@ -76,16 +74,10 @@ public class OrderBook {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        OrderBook other = (OrderBook) obj;
-        if (isbn == null) {
-            if (other.isbn != null)
-                return false;
-        } else if (!isbn.equals(other.isbn))
+        OrderedItem other = (OrderedItem) obj; // Modificato per coerenza (da OrderBook a OrderedItem)
+        if (itemId != other.itemId)
             return false;
-        if (OrderId == null) {
-            if (other.OrderId != null)
-                return false;
-        } else if (!OrderId.equals(other.OrderId))
+        if (orderId != other.orderId)
             return false;
         if (amount != other.amount)
             return false;
@@ -96,7 +88,17 @@ public class OrderBook {
 
     @Override
     public String toString() {
-        return "OrderBook [isbn=" + isbn + ", OrderId=" + OrderId + ", amount=" + amount + ", price=" + price + "]";
+        return "OrderedItem [itemId=" + itemId + ", orderId=" + orderId + ", amount=" + amount + ", price=" + price
+                + "]";
     }
 
+    public Object getQuantity() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getQuantity'");
+    }
+
+    public void setQuantity(Object quantity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setQuantity'");
+    }
 }

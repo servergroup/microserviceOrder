@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-
 public class Order {
     @Id
     @GeneratedValue
@@ -18,33 +17,17 @@ public class Order {
     private String userId;
     private LocalDate date;
     private boolean isDelivered;
-    private List<OrderBook> orderBook = new ArrayList<>();
+    private List<OrderedItem> orderedItems = new ArrayList<>();
 
     public Order() {
     }
 
-    public boolean isDelivered() {
-        return isDelivered;
-    }
-
-    public void setDelivered(boolean isDelivered) {
-        this.isDelivered = isDelivered;
-    }
-
-    public List<OrderBook> getOrderBook() {
-        return orderBook;
-    }
-
-    public void setOrderBook(List<OrderBook> orderBook) {
-        this.orderBook = orderBook;
-    }
-
-    public Order(int orderId, String userId, LocalDate date, boolean isDelivered, List<OrderBook> orderBook) {
+    public Order(int orderId, String userId, LocalDate date, boolean isDelivered, List<OrderedItem> orderedItems) {
         this.orderId = orderId;
         this.userId = userId;
         this.date = date;
         this.isDelivered = isDelivered;
-        this.orderBook = orderBook;
+        this.orderedItems = orderedItems;
     }
 
     public int getOrderId() {
@@ -71,12 +54,20 @@ public class Order {
         this.date = date;
     }
 
-    public boolean isIsDelivered() {
+    public boolean isDelivered() {
         return isDelivered;
     }
 
-    public void setIsDelivered(boolean isDelivered) {
+    public void setDelivered(boolean isDelivered) {
         this.isDelivered = isDelivered;
+    }
+
+    public List<OrderedItem> getOrderedItems() {
+        return orderedItems;
+    }
+
+    public void setOrderedItems(List<OrderedItem> orderedItems) {
+        this.orderedItems = orderedItems;
     }
 
     @Override
@@ -86,7 +77,7 @@ public class Order {
         hash = 97 * hash + Objects.hashCode(this.userId);
         hash = 97 * hash + Objects.hashCode(this.date);
         hash = 97 * hash + (this.isDelivered ? 1 : 0);
-        hash = 97 * hash + Objects.hashCode(this.orderBook);
+        hash = 97 * hash + Objects.hashCode(this.orderedItems);
         return hash;
     }
 
@@ -101,19 +92,13 @@ public class Order {
         Order other = (Order) obj;
         if (orderId != other.orderId)
             return false;
-        if (userId != other.userId)
+        if (!Objects.equals(userId, other.userId))
             return false;
-        if (date == null) {
-            if (other.date != null)
-                return false;
-        } else if (!date.equals(other.date))
+        if (!Objects.equals(date, other.date))
             return false;
         if (isDelivered != other.isDelivered)
             return false;
-        if (orderBook == null) {
-            if (other.orderBook != null)
-                return false;
-        } else if (!orderBook.equals(other.orderBook))
+        if (!Objects.equals(orderedItems, other.orderedItems))
             return false;
         return true;
     }
@@ -121,7 +106,6 @@ public class Order {
     @Override
     public String toString() {
         return "Order [orderId=" + orderId + ", userId=" + userId + ", date=" + date + ", isDelivered=" + isDelivered
-                + ", orderBook=" + orderBook + "]";
+                + ", orderedItems=" + orderedItems + "]";
     }
-
 }

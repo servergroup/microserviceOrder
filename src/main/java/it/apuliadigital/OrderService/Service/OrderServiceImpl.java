@@ -3,7 +3,7 @@ package it.apuliadigital.OrderService.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.apuliadigital.OrderService.model.Order;
-import it.apuliadigital.OrderService.model.OrderBook;
+import it.apuliadigital.OrderService.model.OrderedItem;
 import it.apuliadigital.OrderService.repository.OrderRepository;
 
 public class OrderServiceImpl implements IOrder {
@@ -19,7 +19,7 @@ public class OrderServiceImpl implements IOrder {
 
     @Override
     public boolean deleteOrder(Integer id) {
-        if(id.equals(null)){
+        if (id.equals(null)) {
             return false;
         }
         repository.deleteById(id);
@@ -28,37 +28,45 @@ public class OrderServiceImpl implements IOrder {
     }
 
     @Override
-    public boolean updateQuantiity(Integer id) {
-      Order order=new Order();
-      OrderBook orderBook=new OrderBook();
+    public boolean updateQuantiity(Integer id, OrderedItem orderedItem) {
+        Order order = repository.findById(id).orElse(null);
+        if (order == null || orderedItem == null) {
+            return false;
+        }
 
-      order.setOrderId(id);
-      orderBook.setAmount(amount);  
+        for (OrderedItem item : order.getOrderedItems()) {
+            if (item.getItemId() == orderedItem.getItemId()) {
+                item.setQuantity(orderedItem.getQuantity());
+                repository.save(order);
+                return true;
+            }
+        }
 
         return false;
     }
-/* 
-    @Override
-    public List<Order> getOrders() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
-    }
+    /*  
+     * @Override
+     * public List<Order> getOrders() {
+     * // TODO Auto-generated method stub
+     * throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
+     * }
+     * 
+     * @Override
+     * public Order getOrderDetail(int id) {
+     * // TODO Auto-generated method stub
+     * throw new
+     * UnsupportedOperationException("Unimplemented method 'getOrderDetail'");
+     * }
+     */
+    // @Override
+    // public List<Order> getOrders() {
+    // TODO Auto-generated method stub
+    // throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
+    // }
 
-    @Override
-    public Order getOrderDetail(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrderDetail'");
-    }
-*/
- //@Override
-//    public List<Order> getOrders() {
-        // TODO Auto-generated method stub
-  //      throw new UnsupportedOperationException("Unimplemented method 'getOrders'");
-    //}
+    // @Override
+    // public Order getOrderDetail(String id) {
 
-//    @Override
-  //  public Order getOrderDetail(String id) {
-        
-    //}
+    // }
 
 }
