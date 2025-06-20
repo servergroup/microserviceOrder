@@ -8,20 +8,24 @@ import it.apuliadigital.OrderService.model.Order;
 import it.apuliadigital.OrderService.model.OrderedItem;
 import it.apuliadigital.OrderService.repository.OrderRepository;
 
-public class OrderServiceImpl implements IOrder {
+public class OrderServiceImpl implements IOrder 
+{
 
     @Autowired
     private OrderRepository repository;
 
     @Override
-    public boolean saveOrder(Order order) {
+    public boolean saveOrder(Order order) 
+    {
         repository.save(order);
         return repository.existsById(order.getOrderId());
     }
 
     @Override
-    public boolean deleteOrder(Integer id) {
-        if (id.equals(null)) {
+    public boolean deleteOrder(Integer id) 
+    {
+        if (id.equals(null)) 
+        {
             return false;
         }
         repository.deleteById(id);
@@ -30,15 +34,19 @@ public class OrderServiceImpl implements IOrder {
     }
 
     @Override
-    public boolean updateQuantiity(Integer id, OrderedItem orderedItem) {
+    public boolean updateQuantiity(Integer id, OrderedItem orderedItem) 
+    {
         Order order = repository.findById(id).orElse(null);
-        if (order == null || orderedItem == null) {
+        if (order == null || orderedItem == null) 
+        {
             return false;
         }
 
-        for (OrderedItem item : order.getOrderedItems()) {
-            if (item.getItemId() == orderedItem.getItemId()) {
-                item.setQuantity(orderedItem.getQuantity());
+        for (OrderedItem item : order.getOrderedItems()) 
+        {
+            if (item.getItemId() == orderedItem.getItemId()) 
+            {
+                item.setAmount(orderedItem.getAmount());
                 repository.save(order);
                 return true;
             }
@@ -56,16 +64,15 @@ public class OrderServiceImpl implements IOrder {
     return (List<Order>) repository.findAll();
       }
      
-     //* @Override
-     /** public Order getOrderDetail(int id) {
-     * // TODO Auto-generated method stub
-     * throw new
-     * UnsupportedOperationException("Unimplemented method 'getOrderDetail'");
-     * }
-     */
+     
     
    
 
    
 
+	@Override
+	public List<OrderedItem> getOrderDetail(int id) 
+	{
+		return  repository.findById(id).get().getOrderedItems();
+	}
 }
