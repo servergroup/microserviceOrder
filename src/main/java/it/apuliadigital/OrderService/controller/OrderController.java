@@ -1,16 +1,21 @@
 package it.apuliadigital.OrderService.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.apuliadigital.OrderService.Service.OrderServiceImpl;
+import it.apuliadigital.OrderService.model.Order;
 import it.apuliadigital.OrderService.model.OrderedItem;
+import jakarta.persistence.EntityNotFoundException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping
 @RestController
 public class OrderController {
@@ -18,13 +23,27 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
 
-@PutMapping("/quantity")
-public ResponseEntity<Void> updateItemQuantity(
+    @PostMapping("/addOrders")
+    public boolean createOrder(@RequestBody Order order) {
+        return orderService.saveOrder(order);
+    }
+    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable int id) {
+        try {
+            orderService.deleteOrder(id);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+    }
+
+    @PutMapping("/quantity")
+    public ResponseEntity<Void> updateItemQuantity(
         @PathVariable Integer orderId,
         @PathVariable Integer itemId,
         @RequestBody OrderedItem orderedItem) {
-
-    
     orderedItem.setItemId(itemId);
 
     boolean updated = orderService.updateQuantity(orderId, orderedItem);
@@ -33,10 +52,5 @@ public ResponseEntity<Void> updateItemQuantity(
     } else {
         return ResponseEntity.notFound().build();
     }
-}
-
-
-    
-
-
+    }
 }
