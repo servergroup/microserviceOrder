@@ -28,8 +28,13 @@ public class OrderServiceImpl implements IOrder
         {
             return false;
         }
-        repository.deleteById(id);
-
+        
+        Order order = repository.findById(id).orElse(null);
+        if(!order.isDelivered())
+        {
+        	repository.deleteById(id);
+        }
+        
         return !repository.existsById(id);
     }
 
