@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
-
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue
@@ -19,6 +21,7 @@ public class Order {
     private String userId;
     private LocalDate date;
     private boolean isDelivered;
+    @ElementCollection
     private List<OrderedItem> orderedItems = new ArrayList<>();
 
     public Order() {

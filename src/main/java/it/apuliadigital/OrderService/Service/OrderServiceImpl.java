@@ -3,11 +3,13 @@ package it.apuliadigital.OrderService.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.apuliadigital.OrderService.model.Order;
 import it.apuliadigital.OrderService.model.OrderedItem;
 import it.apuliadigital.OrderService.repository.OrderRepository;
 
+@Service
 public class OrderServiceImpl implements IOrder 
 {
 
