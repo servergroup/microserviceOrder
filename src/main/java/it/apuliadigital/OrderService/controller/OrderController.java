@@ -20,9 +20,9 @@ public class OrderController
     private OrderServiceImpl orderService;
 
     @PostMapping("/addOrders")
-    public boolean createOrder(@RequestBody Order order) 
+    public ResponseEntity<Order> createOrder(@RequestBody Order order)
     {
-        return orderService.saveOrder(order);
+        return ResponseEntity.ok(orderService.saveOrder(order));
     }
     
 
@@ -66,6 +66,5 @@ public class OrderController
         }
         return ResponseEntity.ok(orderedItems);
     }
-
 
 }

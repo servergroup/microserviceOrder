@@ -7,7 +7,7 @@ import it.apuliadigital.OrderService.model.OrderedItem;
 
 public interface IOrder 
 {
-    public boolean saveOrder(Order order);
+    public Order saveOrder(Order order);
 
     public boolean deleteOrder(Integer id);
 

@@ -17,10 +17,10 @@ public class OrderServiceImpl implements IOrder
     private OrderRepository repository;
 
     @Override
-    public boolean saveOrder(Order order) 
+    public Order saveOrder(Order order)
     {
-        repository.save(order);
-        return repository.existsById(order.getOrderId());
+        Order savedOrder = repository.save(order);
+        return savedOrder;
     }
 
     @Override

@@ -110,7 +110,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [orderId=" + orderId + ", userId=" + userId + ", date=" + date + ", isDelivered=" + isDelivered
-                + ", orderedItems=" + orderedItems + "]";
+        return "Order [orderId=" + orderId +
+                ", userId=" + userId +
+                ", date=" + date +
+                ", isDelivered=" + isDelivered +
+                ", orderedItems=" + orderedItems + "]";
     }
 }

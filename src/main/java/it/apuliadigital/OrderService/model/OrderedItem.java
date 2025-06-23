@@ -100,7 +100,10 @@ public class OrderedItem
     @Override
     public String toString() 
     {
-        return "OrderedItem [itemId=" + itemId + ", orderId=" + orderId + ", amount=" + amount + ", price=" + price
+        return "OrderedItem [itemId=" + itemId +
+                ", orderId=" + orderId +
+                ", amount=" + amount +
+                ", price=" + price
                 + "]";
     }
 }
