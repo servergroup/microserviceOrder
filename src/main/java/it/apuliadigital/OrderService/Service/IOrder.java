@@ -16,6 +16,4 @@ public interface IOrder
     public List<Order> getOrders();
     
     public List<OrderedItem> getOrderDetail(int id);
-
-    // public Order getOrderDetail(int id);
 }

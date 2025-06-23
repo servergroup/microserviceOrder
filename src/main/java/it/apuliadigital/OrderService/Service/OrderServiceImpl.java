@@ -72,11 +72,6 @@ public class OrderServiceImpl implements IOrder
         return (List<Order>) repository.findAll();
       }
      
-     
-    
-   
-
-   
 
 	@Override
 	public List<OrderedItem> getOrderDetail(int id) 

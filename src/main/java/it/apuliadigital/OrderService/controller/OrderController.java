@@ -1,20 +1,15 @@
 package it.apuliadigital.OrderService.controller;
 
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import it.apuliadigital.OrderService.Service.OrderServiceImpl;
 import it.apuliadigital.OrderService.model.Order;
 import it.apuliadigital.OrderService.model.OrderedItem;
 import jakarta.persistence.EntityNotFoundException;
+
+import java.util.List;
 
 @RequestMapping
 @RestController
@@ -56,4 +51,21 @@ public class OrderController
     		return ResponseEntity.notFound().build();
     	}
     }
+
+    @GetMapping
+    public List<Order> getOrders() {
+        return orderService.getOrders();
+    }
+
+    // New GET endpoint to fetch ordered items by order id
+    @GetMapping("/{id}/details")
+    public ResponseEntity<List<OrderedItem>> getOrderDetail(@PathVariable int id) {
+        List<OrderedItem> orderedItems = orderService.getOrderDetail(id);
+        if (orderedItems == null || orderedItems.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(orderedItems);
+    }
+
+
 }
